@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Calculator</title>
+    <style>
+        .calculator {
+            width: 280px;
+            border: 2px solid grey;
+            padding-left: 3px;
+            padding-right:3px;
+            padding-top:23px;
+            padding-bottom:23px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left:450px;
+            margin-top:150px;
+            border-radius:5px;
+        }
+
+        .display {
+            width: 210px;
+            height: 30px;
+            font-size: 20px;
+            text-align: right;
+            padding: 5px;
+            border: 1px solid grey;
+            background: #f0f0f0;
+            border-radius:5px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+            border-radius:5px;
+        }
+
+        .button {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid grey;
+            background: #fff;
+            cursor: pointer;
+            text-align: center;
+            border-radius:5px;
+        }
+
+        .button.operator {
+            background:white;
+        }
+
+        .button.clear {
+            background:lightblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" class="display" id="display" readonly>
+        <div class="buttons">
+            <div class="button" onclick="appendValue('7')">7</div>
+            <div class="button" onclick="appendValue('8')">8</div>
+            <div class="button" onclick="appendValue('9')">9</div>
+            <div class="button operator" onclick="appendValue('/')">/</div>
+
+            <div class="button" onclick="appendValue('4')">4</div>
+            <div class="button" onclick="appendValue('5')">5</div>
+            <div class="button" onclick="appendValue('6')">6</div>
+            <div class="button operator" onclick="appendValue('*')">*</div>
+
+            <div class="button" onclick="appendValue('1')">1</div>
+            <div class="button" onclick="appendValue('2')">2</div>
+            <div class="button" onclick="appendValue('3')">3</div>
+            <div class="button operator" onclick="appendValue('-')">-</div>
+
+            <div class="button clear" onclick="clearDisplay()">AC</div>
+            <div class="button" onclick="appendValue('0')">0</div>
+            <div class="button" onclick="calculateResult()">=</div>
+            <div class="button operator" onclick="appendValue('+')">+</div>
+        </div>
+    </div>
+
+    <script>
+        function appendValue(value) {
+            const display = document.getElementById("display");
+            display.value += value;
+        }
+
+        function clearDisplay() {
+            const display = document.getElementById("display");
+            display.value = '';
+        }
+
+        function calculateResult() {
+            const display = document.getElementById("display");
+            try {
+                const result = eval(display.value); // WARNING: Be cautious with eval
+                display.value = result;
+            } catch (e) {
+                display.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
